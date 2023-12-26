@@ -1,0 +1,22 @@
+{
+  "name": "readmegenie",
+  "version": "1.0.0",
+  "description": "A cli application that generates professional and comprehensive README files.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maximilian93B/ReadMeGenie-.git"
+  },
+  "author": "MDB dev",
+  "license": "MIT ",
+  "bugs": {
+    "url": "https://github.com/Maximilian93B/ReadMeGenie-/issues"
+  },
+  "homepage": "https://github.com/Maximilian93B/ReadMeGenie-#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  }
+}
