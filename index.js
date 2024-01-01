@@ -1,3 +1,4 @@
+const fs = require('fs')
 const inquirer = require('inquirer');
 
 const StarterQuestions = [
@@ -20,7 +21,7 @@ const StarterQuestions = [
   {
 
     type: 'input',
-    name: 'installation instructions',
+    name: 'installation_instructions',
     message: 'Provide step by step instructions on how to install your project:',
 
   },
@@ -43,33 +44,35 @@ const StarterQuestions = [
 
   {
  
-    type: 'input',
-    name: ' license ',
-    message: 'Chose a icense for your project:',
-    Option: [ 'MIT', 'Apache 2.0', 'GPLv3', 'BSD 3-Clause', 'None' ]
+    
+      type: 'list',
+      name: 'license',
+      message: 'Choose a license for your project:',
+      choices: ['MIT', 'Apache 2.0', 'GPLv3', 'BSD 3-Clause', 'None']
+    
   
   },
 
   {
 
     type: 'input',
-    name: "GitHub username",
+    name: "GitHub_username",
     message: 'What is your GitHub username?'
  
   },
 
   {
  
-    type: 'inpout',
-    name: 'Emial address ',
-    message: 'Enter your Email Address'
+    type: 'input',
+    name: 'email',
+    message: 'Enter your Email Address:'
  
   },
 
   {
 
     type: 'input',
-    name: 'Project URl',
+    name: 'Project_URl',
     message: ' Enter the URL of your project if possible, If not dont worry we can add it later'
 
   },
@@ -77,22 +80,71 @@ const StarterQuestions = [
 
   {
     tpye: 'input',
-    name: 'Additional Information',
+    name: 'Additional_Information',
     message: 'Is there any additional information you want people to know about the project'
   }
 
 ];
  
+function generateReadme(answers) {
+  return `
+# ${answers.title}
+
+## Description
+${answers.description}
+
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Questions](#questions)
+- [Project URL](#project-url)
+- [Additional Information](#additional-information)
+
+## Installation
+${answers.installation_instructions}
+
+## Usage
+${answers.usage_information}
+
+## Contributing
+${answers.open_source}
+
+## License
+This project is licensed under the ${answers.license} license.
+
+## Questions
+If you have any questions about the repo, open an issue or contact me directly at [${answers.email}](mailto:${answers.email}). 
+You can find more of my work at [${answers.github_username}](https://github.com/${answers.github_username}/).
+
+## Project URL
+${answers.project_url}
+
+## Additional Information
+${answers.additional_information}
+`;
+}
 
 
+function writeToFile (filename,data){
+  fs.writeFile(fileName, data, "utf8" , (err) => {
+    if (err) {
+      console.log(err);
+    } else { 
+      console.log('README.md Suucessful');
+    }
+  });
+}
 
 
 
 inquirer.prompt(StarterQuestions).then(answers => {
   console.log('Generating README...');
-  // call a function to create and write the README file.
-  console.log(answers);
+  const readmeContent = generateReadme(answers);
+  console.log(readmeContent);
 });
+
 
 
 
