@@ -128,11 +128,13 @@ ${answers.additional_information}
 
 
 function writeToFile (filename,data){
-  fs.writeFile(fileName, data, "utf8" , (err) => {
+  const filePath = ' ${process.cwd()}/README.md';
+  
+  fs.writeFile(filePath, data, "utf8" , (err) => {
     if (err) {
       console.log(err);
     } else { 
-      console.log('README.md Suucessful');
+      console.log('README.md Suucessful located in ${process.cwd()}');
     }
   });
 }
