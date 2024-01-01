@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Maximilian93B/ReadMeGenie-#readme",
   "dependencies": {
-    "inquirer": "^8.2.4"
+    "figlet": "^1.7.0",
+    "inquirer": "^8.2.6"
   }
 }

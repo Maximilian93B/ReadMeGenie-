@@ -1,6 +1,10 @@
 const fs = require('fs')
 const inquirer = require('inquirer');
+const figlet = require('figlet');
 const { cliTemplate , webAppTemplate } = require ('./templates');
+
+console.log(figlet.textSync('readmeGenie', { font: 'standard'},{ horizontalLayout: 'full'}));
+
 
 const StarterQuestions = [
 {
@@ -107,7 +111,7 @@ function generateReadme(answers) {
   } else if (answers.projectType === 'Web App') {
     template = webAppTemplate(answers);
   }
-  return template
+  return template;
 }
 
 function writeToFile (filename,data){
@@ -124,6 +128,7 @@ function writeToFile (filename,data){
 
 
 
+
 inquirer.prompt(StarterQuestions).then(answers => {
   console.log('Generating README...');
   const readmeContent = generateReadme(answers);
@@ -131,5 +136,7 @@ inquirer.prompt(StarterQuestions).then(answers => {
 });
 
 
+
+  
 
 
