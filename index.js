@@ -1,7 +1,17 @@
 const fs = require('fs')
 const inquirer = require('inquirer');
+const { cliTemplate , webAppTemplate } = require ('./templates');
 
 const StarterQuestions = [
+{
+
+  type: 'list',
+  name: 'projectType',
+  message: 'Is your project a CLI Tool or a Web App?',
+  choices: ['CLI Tool', 'Web App']
+
+},
+
   {
 
     type: 'input',
@@ -21,7 +31,7 @@ const StarterQuestions = [
   {
 
     type: 'input',
-    name: 'installation_instructions',
+    name: 'installationInstructions',
     message: 'Provide step by step instructions on how to install your project:',
 
   },
@@ -29,34 +39,39 @@ const StarterQuestions = [
   {
 
     type: 'input',
-    name: 'Usage information ',
+    name: 'usageInformation ',
     message: 'How will users interact with your project. It would be helpful to provide some use cases if you can:',
-
+    when: answers => answers.projectType === 'Web App'
   },
 
   {
+    type: 'input',
+    name: 'commandUsage',
+    message: 'Provide command-line usage examples for your application.',
+    when: answers => answers.projectType === 'CLI Tool'
+  },
+  
+  {
 
     type: 'input',
-    name: 'Open Source',
+    name: 'contribution',
     message: "Can others contribute to your project? If so how please explain how."
   
   },
 
   {
  
-    
       type: 'list',
       name: 'license',
       message: 'Choose a license for your project:',
       choices: ['MIT', 'Apache 2.0', 'GPLv3', 'BSD 3-Clause', 'None']
     
-  
   },
 
   {
 
     type: 'input',
-    name: "GitHub_username",
+    name: "githubUsername",
     message: 'What is your GitHub username?'
  
   },
@@ -69,66 +84,34 @@ const StarterQuestions = [
  
   },
 
-  {
-
-    type: 'input',
-    name: 'Project_URl',
-    message: ' Enter the URL of your project if possible, If not dont worry we can add it later'
-
-  },
-
+{
+  type: 'input',
+  name: 'projectUrl', 
+  message: 'Enter the URL of your project if applicable, if not you can always add it later!',
+  when: answers => answers.projectType === 'Web App'
+},
 
   {
     tpye: 'input',
-    name: 'Additional_Information',
+    name: 'additionalInformation',
     message: 'Is there any additional information you want people to know about the project'
   }
 
 ];
  
 function generateReadme(answers) {
-  return `
-# ${answers.title}
+  let template;
+  if(answers.projectType === 'CLI Tool') {
+    template = cliTemplate(answers);
 
-## Description
-${answers.description}
-
-## Table of Contents
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Questions](#questions)
-- [Project URL](#project-url)
-- [Additional Information](#additional-information)
-
-## Installation
-${answers.installation_instructions}
-
-## Usage
-${answers.usage_information}
-
-## Contributing
-${answers.open_source}
-
-## License
-This project is licensed under the ${answers.license} license.
-
-## Questions
-If you have any questions about the repo, open an issue or contact me directly at [${answers.email}](mailto:${answers.email}). 
-You can find more of my work at [${answers.github_username}](https://github.com/${answers.github_username}/).
-
-## Project URL
-${answers.project_url}
-
-## Additional Information
-${answers.additional_information}
-`;
+  } else if (answers.projectType === 'Web App') {
+    template = webAppTemplate(answers);
+  }
+  return template
 }
 
-
 function writeToFile (filename,data){
-  const filePath = ' ${process.cwd()}/README.md';
+  const filePath = ' ${process.cwd()}/${filename}';
   
   fs.writeFile(filePath, data, "utf8" , (err) => {
     if (err) {
