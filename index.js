@@ -98,13 +98,15 @@ const StarterQuestions = [
 },
 
   {
-    tpye: 'input',
+    type: 'input',
     name: 'additionalInformation',
     message: 'Is there any additional information you want people to know about the project'
   }
 
 ];
  
+
+
 function generateReadme(answers) {
   let template;
   if(answers.projectType === 'CLI Tool') {
@@ -116,31 +118,46 @@ function generateReadme(answers) {
   return template;
 }
 
-function writeToFile (filename,data){
-  const spinner = ora('Generating README...').startt();
+function writeToFile(filename, data) {
+  const filePath = `${process.cwd()}/${filename}`;
   
-  const filePath = ' ${process.cwd()}/${filename}';
-  
-  fs.writeFile(filePath, data, "utf8" , (err) => {
+  fs.writeFile(filePath, data, "utf8", (err) => {
     if (err) {
-      spinner.fail('Failed to create README.md');
-      console.log(err);
-    } else { 
-        spinner.succeed('README.md Suucessfully created');
+      console.log('Failed to create README.md');
+      console.error(err);
+    } else {
+      console.log('README.md successfully created');
     }
   });
 }
 
+function confirmAndGenerateReadme(answers) {
+  console.log('\nHow does this look?:');
+  console.log(JSON.stringify(answers, null, '  '));
 
+  inquirer.prompt([
+    {
+      type: 'confirm',
+      name: 'confirmGeneration',
+      message: 'Are you happy? Shall we generate your README?',
+      default: true
+    }
+  ]).then(confirmation => {
+    if (confirmation.confirmGeneration) {
+      const readmeContent = generateReadme(answers);
+      writeToFile('README.md', readmeContent);
+    } else {
+      console.log('Unable to generate README, You can start over if you wish.');
+    }
+  });
+}
 
+function startQuestions() {
+  inquirer.prompt(StarterQuestions).then(answers => {
+    confirmAndGenerateReadme(answers);
+  });
+}
 
-inquirer.prompt(StarterQuestions).then(answers => {
-  const readmeContent = generateReadme(answers);
-writeToFile('README.md', readmeContent);
-});
-
-
-
-  
+startQuestions(); 
 
 
