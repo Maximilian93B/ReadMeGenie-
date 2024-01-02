@@ -3,7 +3,9 @@ const inquirer = require('inquirer');
 const figlet = require('figlet');
 const { cliTemplate , webAppTemplate } = require ('./templates');
 
-console.log(figlet.textSync('readmeGenie', { font: 'standard'},{ horizontalLayout: 'full'}));
+console.log(figlet.textSync('readMeGenie', { font: 'colossal'},{ horizontalLayout: 'full'}));
+
+console.log('Welcome to readmeGenie, the intuitive tool that effortlessly crafts professional README files for your projects. Answer a few simple questions, and let/s get started!\n');
 
 
 const StarterQuestions = [
@@ -115,13 +117,16 @@ function generateReadme(answers) {
 }
 
 function writeToFile (filename,data){
+  const spinner = ora('Generating README...').startt();
+  
   const filePath = ' ${process.cwd()}/${filename}';
   
   fs.writeFile(filePath, data, "utf8" , (err) => {
     if (err) {
+      spinner.fail('Failed to create README.md');
       console.log(err);
     } else { 
-      console.log('README.md Suucessful located in ${process.cwd()}');
+        spinner.succeed('README.md Suucessfully created');
     }
   });
 }
@@ -130,9 +135,8 @@ function writeToFile (filename,data){
 
 
 inquirer.prompt(StarterQuestions).then(answers => {
-  console.log('Generating README...');
   const readmeContent = generateReadme(answers);
-  console.log(readmeContent);
+writeToFile('README.md', readmeContent);
 });
 
 
