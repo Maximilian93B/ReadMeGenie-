@@ -1,3 +1,7 @@
+
+// CLI Template
+ 
+ 
  const cliTemplate = answers => `
 # ${answers.title}
 
@@ -22,6 +26,9 @@ ${answers.contributing}
 ## License
 This project is licensed under the ${answers.license} license.
 `;
+
+// Web App Template 
+
 
 const webAppTemplate = answers => `
 # ${answers.title}
