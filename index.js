@@ -1,13 +1,15 @@
+//Define 
 const fs = require('fs')
 const inquirer = require('inquirer');
 const figlet = require('figlet');
-const { cliTemplate , webAppTemplate } = require ('./templates');
+const { cliTemplate , webAppTemplate } = require ('./templates'); // Refer to templates in 'templates.js'
 
+// readmeGenie title  display in CLI  and welcome message
 console.log(figlet.textSync('readMeGenie', { font: 'colossal'},{ horizontalLayout: 'full'}));
 
 console.log('Welcome to readmeGenie, the intuitive tool that effortlessly crafts professional README files for your projects. Answer a few simple questions, and let/s get started!\n');
 
-
+// All questions from array will display in the CLI
 const StarterQuestions = [
 {
 
@@ -41,7 +43,7 @@ const StarterQuestions = [
     message: 'Provide step by step instructions on how to install your project:',
 
   },
-  
+  // Uses strict equality to define if webApp or CLI app
   {
 
     type: 'input',
@@ -105,10 +107,10 @@ const StarterQuestions = [
 
 ];
  
-
-
+// function generateReadme will generate README content based on users input provided from starterQuestions[]
+ 
 function generateReadme(answers) {
-  let template;
+  let template; // leave initial value null , if CLI Template call clitemplate if webApp call webApptemplate
   if(answers.projectType === 'CLI Tool') {
     template = cliTemplate(answers);
 
@@ -118,6 +120,7 @@ function generateReadme(answers) {
   return template;
 }
 
+// Function will write the gernerated README content to a file named README.md (for conventional puroposes) Will log success or failure 
 function writeToFile(filename, data) {
   const filePath = `${process.cwd()}/${filename}`;
   
@@ -131,10 +134,13 @@ function writeToFile(filename, data) {
   });
 }
 
+// this function will display the summary of all responses for the user to confirm input 
 function confirmAndGenerateReadme(answers) {
   console.log('\nHow does this look?:');
   console.log(JSON.stringify(answers, null, '  '));
 
+  
+  // prompt that will confirm if the user wants to generate README.
   inquirer.prompt([
     {
       type: 'confirm',
@@ -152,12 +158,14 @@ function confirmAndGenerateReadme(answers) {
   });
 }
 
+// initiate inquirer prompt with starterQuestions --> will pass users answers to confirm and generate the file. 
 function startQuestions() {
   inquirer.prompt(StarterQuestions).then(answers => {
     confirmAndGenerateReadme(answers);
   });
 }
 
+// execture the script. 
 startQuestions(); 
 
 

@@ -1,8 +1,7 @@
 
 // CLI Template
- 
- 
- const cliTemplate = answers => `
+
+const cliTemplate = answers => `
 # ${answers.title}
 
 ## Description
