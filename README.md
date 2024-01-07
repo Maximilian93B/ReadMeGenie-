@@ -1,20 +1,20 @@
 
-# fdsgfdg
+# reademgenie
+
+## Live Demo
+[Live Demo Link](hdrrgrggfg)
 
 ## Description
-dfg
+decripgign fgffgdgfdgdfgdfgfdgcbvnghfhjthdr
 
-## Installation
-
-npm install fdsgfdg
-
-
-## Usage
-Provide examples of how to use the CLI tool.
-undefined
+## Built With
+Mention the frameworks, libraries, and tools used.
 
 ## Features
-List the features of your CLI tool.
+What makes your project stand out?
+
+## Getting Started
+Instructions on setting up the project locally.
 
 ## Contributing
 undefined

@@ -1,13 +1,15 @@
-//Define 
+//Define whats needed:
+
 const fs = require('fs')
 const inquirer = require('inquirer');
 const figlet = require('figlet');
 const { cliTemplate , webAppTemplate } = require ('./templates'); // Refer to templates in 'templates.js'
 
 // readmeGenie title  display in CLI  and welcome message
-console.log(figlet.textSync('readMeGenie', { font: 'colossal'},{ horizontalLayout: 'full'}));
+console.log(figlet.textSync('readMeGenie', { font: 'Colossal'},{ horizontalLayout: 'full'}));
 
 console.log('Welcome to readmeGenie, the intuitive tool that effortlessly crafts professional README files for your projects. Answer a few simple questions, and let/s get started!\n');
+
 
 // All questions from array will display in the CLI
 const StarterQuestions = [
@@ -134,7 +136,7 @@ function writeToFile(filename, data) {
   });
 }
 
-// this function will display the summary of all responses for the user to confirm input 
+  // this function will display the summary of all responses for the user to confirm input 
 function confirmAndGenerateReadme(answers) {
   console.log('\nHow does this look?:');
   console.log(JSON.stringify(answers, null, '  '));
@@ -158,14 +160,14 @@ function confirmAndGenerateReadme(answers) {
   });
 }
 
-// initiate inquirer prompt with starterQuestions --> will pass users answers to confirm and generate the file. 
+ // initiate inquirer prompt with starterQuestions --> will pass users answers to confirm and generate the file. 
 function startQuestions() {
   inquirer.prompt(StarterQuestions).then(answers => {
     confirmAndGenerateReadme(answers);
   });
 }
 
-// execture the script. 
+ // execture the script. 
 startQuestions(); 
 
 
