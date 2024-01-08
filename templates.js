@@ -25,6 +25,10 @@ ${answers.contribution}
 
 ## License
 This project is licensed under the ${answers.license} license.
+
+## Notes 
+${answers.additionalInformation} || 'No additional notes provided.'
+
 `;
 
 // Web App Template 
@@ -55,6 +59,9 @@ ${answers.contribution}
 
 ## License
 This project is licensed under the ${answers.license} license.
+
+## Notes
+${answers.additionalInformation || 'No additional notes provided.'}
 `;
 
 module.exports = { cliTemplate, webAppTemplate };
