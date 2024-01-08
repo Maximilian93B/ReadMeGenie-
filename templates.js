@@ -1,6 +1,4 @@
-
 // CLI Template
-
 const cliTemplate = answers => `
 # ${answers.title}
 
@@ -8,27 +6,28 @@ const cliTemplate = answers => `
 ${answers.description}
 
 ## Installation
-
+\`\`\`
 npm install ${answers.title.toLowerCase().split(' ').join('-')}
-
+\`\`\`
 
 ## Usage
-Provide examples of how to use the CLI tool.
-${answers.usage}
+${answers.commandUsage || 'Provide examples of how to use the CLI tool.'}
 
 ## Features
 List the features of your CLI tool.
 
 ## Contributing
-${answers.contributing}
+${answers.contribution}
+
+## Contact
+- GitHub: [${answers.githubUsername}](https://github.com/${answers.githubUsername})
+- Email: [${answers.email}](mailto:${answers.email})
 
 ## License
 This project is licensed under the ${answers.license} license.
 `;
 
 // Web App Template 
-
-
 const webAppTemplate = answers => `
 # ${answers.title}
 
@@ -48,10 +47,14 @@ What makes your project stand out?
 Instructions on setting up the project locally.
 
 ## Contributing
-${answers.contributing}
+${answers.contribution}
+
+## Contact
+- GitHub: [${answers.githubUsername}](https://github.com/${answers.githubUsername})
+- Email: [${answers.email}](mailto:${answers.email})
 
 ## License
 This project is licensed under the ${answers.license} license.
 `;
 
-module.exports = {cliTemplate, webAppTemplate }; 
+module.exports = { cliTemplate, webAppTemplate };
