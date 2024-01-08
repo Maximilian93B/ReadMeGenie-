@@ -87,19 +87,23 @@ const StarterQuestions = [
   },
 
   {
- 
+    // used regex email validation check 
     type: 'input',
     name: 'email',
-    message: 'Enter your Email Address:'
- 
+    message: 'Enter your Email Address:',
+    validate: function(input) {
+      const validEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; //regex validation check 
+      return validEmail.test(input) || 'Please enter a valid email address.';
+      
+    } 
+  }
+,
+  {
+    type: 'input',
+    name: 'projectUrl', 
+    message: 'Enter the URL of your project if applicable, if not you can always add it later!',
+    when: answers => answers.projectType === 'Web App'
   },
-
-{
-  type: 'input',
-  name: 'projectUrl', 
-  message: 'Enter the URL of your project if applicable, if not you can always add it later!',
-  when: answers => answers.projectType === 'Web App'
-},
 
   {
     type: 'input',
@@ -131,10 +135,19 @@ function writeToFile(filename, data) {
       console.log('Failed to create README.md');
       console.error(err);
     } else {
-      console.log('README.md successfully created');
+      // Displaying the success message using figlet
+      figlet('Happy Coding ! ', (err, data) => {
+        if (err) {
+          console.log('Something went wrong...');
+          console.dir(err);
+          return;
+        }
+        console.log(data);  // Display the styled text
+      });
     }
   });
 }
+
 
   // this function will display the summary of all responses for the user to confirm input 
 function confirmAndGenerateReadme(answers) {
