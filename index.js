@@ -129,25 +129,26 @@ function generateReadme(answers) {
 // Function will write the gernerated README content to a file named README.md (for conventional puroposes) Will log success or failure 
 function writeToFile(filename, data) {
   const filePath = `${process.cwd()}/${filename}`;
-  
+
   fs.writeFile(filePath, data, "utf8", (err) => {
     if (err) {
       console.log('Failed to create README.md');
       console.error(err);
     } else {
-      // Displaying the success message using figlet
-      figlet('Happy Coding ! ', (err, data) => {
+      // Display "Happy Coding!" using figlet
+      figlet('Happy Coding!', (err, data) => {
         if (err) {
           console.log('Something went wrong...');
           console.dir(err);
           return;
         }
-        console.log(data);
-        console.log('README Successfully Generated, Have a good Day!\n') // Will Display underneath the  'Happy Coding' Figlet  // Display the styled text
+        console.log(data);  // Display the styled "Happy Coding!" text
+        console.log('README Successfully Generated');  // Display the success message here, inside the callback
       });
     }
   });
 }
+
 
 
   // this function will display the summary of all responses for the user to confirm input 
