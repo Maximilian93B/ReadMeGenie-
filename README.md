@@ -59,7 +59,7 @@ List the features of your CLI tool.
  readMeGenie is open to any developper that wants to improve the tool and make it their own. Happy Coding ! 
 
 ## Contact
-- GitHub: [](https://github.com/Maximilian93B/)
+- GitHub: [https://github.com/Maximilian93B/]
 - Email: [max.md.bosch@gmail.com](mailto:max.md.bosch@gmail.com)
 
 ## License

@@ -3,9 +3,9 @@
 const fs = require('fs')
 const inquirer = require('inquirer');
 const figlet = require('figlet');
-const { cliTemplate , webAppTemplate } = require ('./templates'); // Refer to templates in 'templates.js'
+const { cliTemplate , webAppTemplate } = require ('./templates'); // Refer to templates in './lib/templates.js'
 
-// readmeGenie title  display in CLI  and welcome message
+// readmeGenie title  display in CLI  and welcome message using figlet 
 console.log(figlet.textSync('readMeGenie', { font: 'Colossal'},{ horizontalLayout: 'full'}));
 
 console.log('Welcome to readmeGenie, the intuitive tool that effortlessly crafts professional README files for your projects. Answer a few simple questions, and let/s get started!\n');
@@ -142,7 +142,8 @@ function writeToFile(filename, data) {
           console.dir(err);
           return;
         }
-        console.log(data);  // Display the styled text
+        console.log(data);
+        console.log('README Successfully Generated, Have a good Day!\n') // Will Display underneath the  'Happy Coding' Figlet  // Display the styled text
       });
     }
   });
