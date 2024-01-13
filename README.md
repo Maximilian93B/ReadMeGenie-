@@ -1,7 +1,19 @@
 
 ![readMeGenie](./assets/readmePic.png)
 
-# 
+# readMeGenie 
+
+
+## Table of Contents
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Contributing](#contributing)
+- [Contact](#contact)
+- [License](#license)
+
+
 
 ## Description
 
